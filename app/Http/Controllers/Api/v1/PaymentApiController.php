@@ -17,7 +17,7 @@ class PaymentApiController extends ApiController
      * Create a setup intent
      *
      * @param  SetUpIntentRequest  $request
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function create(SetUpIntentRequest $request)
@@ -36,14 +36,15 @@ class PaymentApiController extends ApiController
 
         return $this->respondCreated(
             ['intent' => $buyer->createSetupIntent()->client_secret],
-            'User setup intent created');
+            'User setup intent created'
+        );
     }
 
     /**
      * Make payment
      *
      * @param  MakePaymentRequest  $request
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(MakePaymentRequest $request)
@@ -52,16 +53,15 @@ class PaymentApiController extends ApiController
 
         try {
             $buyer = Buyer::where('email', data_get($data, 'email'))->firstOrFail();
-        }
-        catch(ModelNotFoundException $e) {
+        } catch (ModelNotFoundException $e) {
             return $this->respondNotFound('User not found');
         }
 
-        $buyer->createOrGetStripeCustomer(); 
+        $buyer->createOrGetStripeCustomer();
         $buyer->addPaymentMethod(data_get($data, 'payment_method'));
 
         $stripeCharge = $buyer->charge(
-            data_get($data, 'amount'), 
+            data_get($data, 'amount'),
             data_get($data, 'payment_method'),
             ['description' => data_get($data, 'description')]
         )->toArray();
@@ -93,15 +93,14 @@ class PaymentApiController extends ApiController
      * Display the payment status.
      *
      * @param  string  $stripeChargeId
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($stripeChargeId)
     {
         try {
             $card = Card::where('stripe_charge_id', $stripeChargeId)->firstOrFail();
-        }
-        catch(ModelNotFoundException $e) {
+        } catch (ModelNotFoundException $e) {
             return $this->respondNotFound('Payment information not found');
         }
 
