@@ -49,7 +49,7 @@ Install composer again using sail command just to make sure every packages requi
 
 I recommend running in development (-d) mode as we are testing this on local machine.
 
-6. Generate application key for Laravel before starting
+6. Generate application key for Laravel before starting for the first time.
 
 ```bash
 ./vendor/bin/sail artisan key:generate
