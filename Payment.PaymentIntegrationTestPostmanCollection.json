@@ -1,0 +1,163 @@
+{
+	"info": {
+		"_postman_id": "936c615a-7fd5-41a1-b4af-cde552d905b7",
+		"name": "Payment",
+		"description": "Payment Integration Test APIs.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Setup Intent",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/v1/payments?name=Thiha Kyaw&email=thihakyaw.mgg@gmail.com",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"payments"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Thiha Kyaw",
+							"description": "Your name"
+						},
+						{
+							"key": "email",
+							"value": "thihakyaw.mgg@gmail.com",
+							"description": "Your Email"
+						}
+					]
+				},
+				"description": "Setup intent. Before checking out, you need your name and email to create a customer at stripe side and create setup_intent_id for next step."
+			},
+			"response": []
+		},
+		{
+			"name": "Make Payment",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/v1/payments?name_on_card=Thiha Kyaw&email=thihakyaw.dev@gmail.com&payment_method=pm_card_visa&amount=40000&description=PlayStation 5",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"payments"
+					],
+					"query": [
+						{
+							"key": "name_on_card",
+							"value": "Thiha Kyaw",
+							"description": "Name on the card"
+						},
+						{
+							"key": "email",
+							"value": "thihakyaw.dev@gmail.com",
+							"description": "Email of the buyer"
+						},
+						{
+							"key": "payment_method",
+							"value": "pm_card_visa",
+							"description": "The payment method is usually the id generated from using 'intnet'. This need UI help to get payment_method but however, for testing purpose there is a workaround. You can use 'pm_card_visa' to bypass the payment_method."
+						},
+						{
+							"key": "amount",
+							"value": "40000",
+							"description": "the price of the product. before sending to Stripe, divide with 100 to get an actual price. (for example 4000 / 100 = 40$)"
+						},
+						{
+							"key": "description",
+							"value": "PlayStation 5",
+							"description": "name of the product"
+						}
+					]
+				},
+				"description": "This will charge the buyer."
+			},
+			"response": []
+		},
+		{
+			"name": "Show Payment",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/v1/payments/{stripe_charge_id}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"payments",
+						"{stripe_charge_id}"
+					]
+				},
+				"description": "Getting the Payment Information.\nReplace {stripe_charge_id} in URL with stripe_charge_id value that you got from Make Payment response."
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

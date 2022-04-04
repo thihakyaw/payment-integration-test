@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\App\Http\Controllers\Api\v1\PaymentApiControllerTest;
+namespace Tests\Feature\App\Http\Controllers\Api\v1;
 
 use App\Models\Buyer;
 use Illuminate\Foundation\Testing\RefreshDatabase;
