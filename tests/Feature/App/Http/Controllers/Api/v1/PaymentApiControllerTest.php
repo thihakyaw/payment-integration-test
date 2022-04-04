@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\App\Http\Controllers\Api\v1\PaymentApiControllerTest;
+namespace Tests\Feature\App\Http\Controllers\Api\v1;
 
 use App\Models\Buyer;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -57,6 +57,29 @@ class PaymentApiControllerTest extends TestCase
             'email' => 'example.dev@gmail.com',
             'amount' => 100,
             'payment_method' => 'pm_card_visa',
+            'description' => 'Product #1'
+        ];
+
+        $response = $this->put('/api/v1/payments', $samplePayload);
+
+        $response->assertJsonStructure([
+            'errors'
+        ])
+        ->assertStatus(404);
+    }
+
+    /**
+     * test payment with invalid payment method
+     *
+     * @return void
+     */
+    public function test_payment_with_invalid_payment_method()
+    {
+        $samplePayload = [
+            'name_on_card' => 'Thiha Kyaw',
+            'email' => 'example.dev@gmail.com',
+            'amount' => 100,
+            'payment_method' => 'pm_card_visa1234',
             'description' => 'Product #1'
         ];
 

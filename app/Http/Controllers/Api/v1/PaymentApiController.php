@@ -58,7 +58,13 @@ class PaymentApiController extends ApiController
         }
 
         $buyer->createOrGetStripeCustomer(); 
-        $buyer->addPaymentMethod(data_get($data, 'payment_method'));
+
+        try {
+            $buyer->addPaymentMethod(data_get($data, 'payment_method'));
+        }
+        catch(Exception $e) {
+            return $this->respondNotFound('No payment method not found.');
+        }
 
         $stripeCharge = $buyer->charge(
             data_get($data, 'amount'), 
