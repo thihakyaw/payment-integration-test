@@ -91,6 +91,8 @@ To run the tests, run this command
 ./vendor/bin/sail artisan test
 ```
 
+<img width="716" alt="Screen_Shot_2022-04-04_at_10 30 15" src="https://user-images.githubusercontent.com/16256698/161590251-ab27a6df-1729-450c-b3fc-e90b7b6b2c44.png">
+
 **User Interface**
 
 ![Untitled](https://user-images.githubusercontent.com/16256698/161589263-820bea47-db8d-463b-bb9e-b6e35d84e4f6.png)
