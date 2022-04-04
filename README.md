@@ -13,13 +13,13 @@ Requirements
 git clone git@github.com:thihakyaw/payment-integration-test.git
 ```
 
-1. Get into the project directory.
+2. Get into the project directory.
 
 ```bash
 cd payment-integration-test
 ```
 
-1. Install packages using `composer` .
+3. Install packages using `composer` .
 
 ```bash
 composer install
@@ -31,8 +31,8 @@ If you are still using the `composer` version 1 and faced memory limit issue, pl
 COMPOSER_MEMORY_LIMIT=-1 composer install
 ```
 
-1. create a new file `.env` in root directory of the project and copy everything inside from `.env.example`
-2. In project directory, run this command to setup the project in `docker`. It will take around 5-10 minutes for the first time composing for Laravel project. 
+4. create a new file `.env` in root directory of the project and copy everything inside from `.env.example`
+5. In project directory, run this command to setup the project in `docker`. It will take around 5-10 minutes for the first time composing for Laravel project. 
 - Tip - set up alias in `zsh` for `./vendor/bin/sail` follow this [guideline](https://linuxhint.com/configure-use-aliases-zsh/) or if you are using `bash`, follow the bash alias setup [guideline](https://www.cyberciti.biz/faq/create-permanent-bash-alias-linux-unix/)
 
 ```bash
@@ -47,21 +47,21 @@ Install composer again using sail command just to make sure every packages requi
 
 I recommend running in development (-d) mode as we are testing this on local machine.
 
-1. Generate application key for Laravel before starting
+6. Generate application key for Laravel before starting
 
 ```bash
 ./vendor/bin/sail artisan key:generate
 ```
 
-1. Migrate database following this command
+7. Migrate database following this command
 
 ```bash
 ./vendor/bin/sail artisan migrate
 ```
 
 Now, we can access the project from `localhost`.
+![Screen Shot 2022-04-04 at 09 25 47](https://user-images.githubusercontent.com/16256698/161588993-669c9720-3e13-4837-94be-d41e6b7123f6.png)
 
-![Screen Shot 2022-04-04 at 09.25.47.png](Payment%20In%20f86de/Screen_Shot_2022-04-04_at_09.25.47.png)
 
 ## The architecture and the design
 
@@ -71,11 +71,13 @@ Third-party Stripe Library - [Laravel Cashier](https://laravel.com/docs/9.x/bill
 
 **Database Design**
 
-![Untitled Diagram.drawio.png](Payment%20In%20f86de/Untitled_Diagram.drawio.png)
+![Untitled Diagram drawio](https://user-images.githubusercontent.com/16256698/161589135-7b5ed5bc-5069-43cb-9d39-3e5eff9c0613.png)
+
 
 **Sequence Diagram**
 
-![Untitled Diagram.drawio (2).png](Payment%20In%20f86de/Untitled_Diagram.drawio_(2).png)
+![Untitled Diagram drawio (2)](https://user-images.githubusercontent.com/16256698/161589164-b452126d-bfd7-4d9a-9adb-c9e1d00b4cbf.png)
+
 
 **Testing**
 
@@ -89,11 +91,12 @@ To run the tests, run this command
 ./vendor/bin/sail artisan test
 ```
 
-![Screen Shot 2022-04-04 at 10.30.15.png](Payment%20In%20f86de/Screen_Shot_2022-04-04_at_10.30.15.png)
+<img width="716" alt="Screen_Shot_2022-04-04_at_10 30 15" src="https://user-images.githubusercontent.com/16256698/161590251-ab27a6df-1729-450c-b3fc-e90b7b6b2c44.png">
 
 **User Interface**
 
-![Untitled](Payment%20In%20f86de/Untitled.png)
+![Untitled](https://user-images.githubusercontent.com/16256698/161589263-820bea47-db8d-463b-bb9e-b6e35d84e4f6.png)
+
 
 When you start call the [http://localhost](http://localhost/) , you will start to see the checkout component only first. After finished step 1, step 2 component will appear and after finishing the step 2, step 3 component will appear.
 
@@ -124,4 +127,5 @@ password - `password`
 
 **Postman Collection**
 
+Add {{host}} as `localhost` in env setup.
 Check the `PaymentIntegrationTestPostmanCollection.json` from the project root directory.
