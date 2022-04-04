@@ -1,64 +1,133 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Payment Integration Test
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Project Setup
 
-## About Laravel
+Requirements
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- `docker`
+- `composer`
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+1. Clone the repository from GitHub from `Terminal`.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+```bash
+git clone git@github.com:thihakyaw/payment-integration-test.git
+```
 
-## Learning Laravel
+2. Get into the project directory.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+```bash
+cd payment-integration-test
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+3. Install packages using `composer` .
 
-## Laravel Sponsors
+```bash
+composer install
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+If you are still using the `composer` version 1 and faced memory limit issue, please use this command.
 
-### Premium Partners
+```bash
+COMPOSER_MEMORY_LIMIT=-1 composer install
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+4. create a new file `.env` in root directory of the project and copy everything inside from `.env.example`
+5. In project directory, run this command to setup the project in `docker`. It will take around 5-10 minutes for the first time composing for Laravel project. 
+- Tip - set up alias in `zsh` for `./vendor/bin/sail` follow this [guideline](https://linuxhint.com/configure-use-aliases-zsh/) or if you are using `bash`, follow the bash alias setup [guideline](https://www.cyberciti.biz/faq/create-permanent-bash-alias-linux-unix/)
 
-## Contributing
+`if you have any mysql service running on localhost with port 3306, please stop that and continue this setup`
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+./vendor/bin/sail up -d
+```
 
-## Code of Conduct
+Install composer again using sail command just to make sure every packages required are in sail.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+./vendor/bin/sail composer install
+```
 
-## Security Vulnerabilities
+I recommend running in development (-d) mode as we are testing this on local machine.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+6. Generate application key for Laravel before starting for the first time.
 
-## License
+```bash
+./vendor/bin/sail artisan key:generate
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+7. Migrate database following this command
+
+```bash
+./vendor/bin/sail artisan migrate
+```
+
+Now, we can access the project from `localhost`.
+![Screen Shot 2022-04-04 at 09 25 47](https://user-images.githubusercontent.com/16256698/161588993-669c9720-3e13-4837-94be-d41e6b7123f6.png)
+
+
+## The architecture and the design
+
+Framework - [Laravel](https://laravel.com)
+
+Third-party Stripe Library - [Laravel Cashier](https://laravel.com/docs/9.x/billing)
+
+**Database Design**
+
+![Untitled Diagram drawio](https://user-images.githubusercontent.com/16256698/161589135-7b5ed5bc-5069-43cb-9d39-3e5eff9c0613.png)
+
+
+**Sequence Diagram**
+
+![Untitled Diagram drawio (2)](https://user-images.githubusercontent.com/16256698/161589164-b452126d-bfd7-4d9a-9adb-c9e1d00b4cbf.png)
+
+
+**Testing**
+
+As this project use `Laravel Cashier` package, there is no separated service classes for charging payment. There is no unit test therefore. Instead, I wrote `Feature Test` as a user’s perspective.
+
+`Note - for feature test, I wanted to use fake name generator and fake email generator rather than hardcoding the name and email but there is something wrong with Faker from Laravel and time is limited, I have to use hard coded values for name and email.` 
+
+To run the tests, run this command 
+
+```bash
+./vendor/bin/sail artisan test
+```
+
+<img width="716" alt="Screen_Shot_2022-04-04_at_10 30 15" src="https://user-images.githubusercontent.com/16256698/161590251-ab27a6df-1729-450c-b3fc-e90b7b6b2c44.png">
+
+**User Interface**
+
+![Untitled](https://user-images.githubusercontent.com/16256698/161589263-820bea47-db8d-463b-bb9e-b6e35d84e4f6.png)
+
+
+When you start call the [http://localhost](http://localhost/) , you will start to see the checkout component only first. After finished step 1, step 2 component will appear and after finishing the step 2, step 3 component will appear.
+
+1. The checkout component. You have to fill in the price not lower than 349$. This is for a test purpose. You can fill any amount that you want to charge for the `Sony WH-1000XM4`. Fill in your name and email and then press `checkout` . You will see payment section
+2. Fill the card information. `Card holder name` can be anyone’s name. For card information testing, you can use these number - 
+- Visa Card - 4242 4242 4242 4242
+- Master Card - 5200828282828210
+
+Expiry Month and Expiry Year can be `Any future date`. `CVC` and `ZIP` number can be any number.
+
+For more Cards to test, check this [Stripe Card Testing Page](https://stripe.com/docs/testing).
+
+1. After payment is charger, you will see the payment information including payment status and card information that Stripe has offer
+
+**Database Connection Access**
+
+In case you want to access database from SequelPro or Workbench, use these credentials.
+
+The credentials are from `.env.example` . 
+
+host - `localhost`
+
+port - `3306`
+
+username - `root`
+
+password - `password`
+
+**Postman Collection**
+
+Add {{host}} as `localhost` in env setup.
+Check the `PaymentIntegrationTestPostmanCollection.json` from the project root directory.

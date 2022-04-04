@@ -28,9 +28,9 @@ class Buyer extends Model
      * @var array<int, string>
      */
     protected $hidden = [
-        'id', 
-        'stripe_id', 
-        'created_at', 
+        'id',
+        'stripe_id',
+        'created_at',
         'updated_at'
     ];
 }
