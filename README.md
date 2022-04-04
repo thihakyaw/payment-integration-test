@@ -13,13 +13,13 @@ Requirements
 git clone git@github.com:thihakyaw/payment-integration-test.git
 ```
 
-1. Get into the project directory.
+2. Get into the project directory.
 
 ```bash
 cd payment-integration-test
 ```
 
-1. Install packages using `composer` .
+3. Install packages using `composer` .
 
 ```bash
 composer install
@@ -31,8 +31,8 @@ If you are still using the `composer` version 1 and faced memory limit issue, pl
 COMPOSER_MEMORY_LIMIT=-1 composer install
 ```
 
-1. create a new file `.env` in root directory of the project and copy everything inside from `.env.example`
-2. In project directory, run this command to setup the project in `docker`. It will take around 5-10 minutes for the first time composing for Laravel project. 
+4. create a new file `.env` in root directory of the project and copy everything inside from `.env.example`
+5. In project directory, run this command to setup the project in `docker`. It will take around 5-10 minutes for the first time composing for Laravel project. 
 - Tip - set up alias in `zsh` for `./vendor/bin/sail` follow this [guideline](https://linuxhint.com/configure-use-aliases-zsh/) or if you are using `bash`, follow the bash alias setup [guideline](https://www.cyberciti.biz/faq/create-permanent-bash-alias-linux-unix/)
 
 ```bash
@@ -47,13 +47,13 @@ Install composer again using sail command just to make sure every packages requi
 
 I recommend running in development (-d) mode as we are testing this on local machine.
 
-1. Generate application key for Laravel before starting
+6. Generate application key for Laravel before starting
 
 ```bash
 ./vendor/bin/sail artisan key:generate
 ```
 
-1. Migrate database following this command
+7. Migrate database following this command
 
 ```bash
 ./vendor/bin/sail artisan migrate
