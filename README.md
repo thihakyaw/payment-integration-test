@@ -91,10 +91,9 @@ To run the tests, run this command
 ./vendor/bin/sail artisan test
 ```
 
-![Untitled](https://user-images.githubusercontent.com/16256698/161589263-820bea47-db8d-463b-bb9e-b6e35d84e4f6.png)
-
-
 **User Interface**
+
+![Untitled](https://user-images.githubusercontent.com/16256698/161589263-820bea47-db8d-463b-bb9e-b6e35d84e4f6.png)
 
 ![Untitled](Payment%20In%20f86de/Untitled.png)
 
