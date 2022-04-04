@@ -95,7 +95,6 @@ To run the tests, run this command
 
 ![Untitled](https://user-images.githubusercontent.com/16256698/161589263-820bea47-db8d-463b-bb9e-b6e35d84e4f6.png)
 
-![Untitled](Payment%20In%20f86de/Untitled.png)
 
 When you start call the [http://localhost](http://localhost/) , you will start to see the checkout component only first. After finished step 1, step 2 component will appear and after finishing the step 2, step 3 component will appear.
 
