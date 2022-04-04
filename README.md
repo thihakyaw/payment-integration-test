@@ -93,7 +93,7 @@ To run the tests, run this command
 ./vendor/bin/sail artisan test
 ```
 
-<img width="716" alt="Screen_Shot_2022-04-04_at_10 30 15" src="https://user-images.githubusercontent.com/16256698/161590251-ab27a6df-1729-450c-b3fc-e90b7b6b2c44.png">
+![image](https://user-images.githubusercontent.com/16256698/161595567-0ee20efc-5307-4756-80a9-ea47afbe40d1.png)
 
 **User Interface**
 
