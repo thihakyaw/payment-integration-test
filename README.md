@@ -60,8 +60,8 @@ I recommend running in development (-d) mode as we are testing this on local mac
 ```
 
 Now, we can access the project from `localhost`.
+![Screen Shot 2022-04-04 at 09 25 47](https://user-images.githubusercontent.com/16256698/161588993-669c9720-3e13-4837-94be-d41e6b7123f6.png)
 
-![Screen Shot 2022-04-04 at 09.25.47.png](Payment%20In%20f86de/Screen_Shot_2022-04-04_at_09.25.47.png)
 
 ## The architecture and the design
 
@@ -71,11 +71,13 @@ Third-party Stripe Library - [Laravel Cashier](https://laravel.com/docs/9.x/bill
 
 **Database Design**
 
-![Untitled Diagram.drawio.png](Payment%20In%20f86de/Untitled_Diagram.drawio.png)
+![Untitled Diagram drawio](https://user-images.githubusercontent.com/16256698/161589135-7b5ed5bc-5069-43cb-9d39-3e5eff9c0613.png)
+
 
 **Sequence Diagram**
 
-![Untitled Diagram.drawio (2).png](Payment%20In%20f86de/Untitled_Diagram.drawio_(2).png)
+![Untitled Diagram drawio (2)](https://user-images.githubusercontent.com/16256698/161589164-b452126d-bfd7-4d9a-9adb-c9e1d00b4cbf.png)
+
 
 **Testing**
 
@@ -89,7 +91,8 @@ To run the tests, run this command
 ./vendor/bin/sail artisan test
 ```
 
-![Screen Shot 2022-04-04 at 10.30.15.png](Payment%20In%20f86de/Screen_Shot_2022-04-04_at_10.30.15.png)
+![Untitled](https://user-images.githubusercontent.com/16256698/161589263-820bea47-db8d-463b-bb9e-b6e35d84e4f6.png)
+
 
 **User Interface**
 
