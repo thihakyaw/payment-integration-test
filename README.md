@@ -35,6 +35,8 @@ COMPOSER_MEMORY_LIMIT=-1 composer install
 5. In project directory, run this command to setup the project in `docker`. It will take around 5-10 minutes for the first time composing for Laravel project. 
 - Tip - set up alias in `zsh` for `./vendor/bin/sail` follow this [guideline](https://linuxhint.com/configure-use-aliases-zsh/) or if you are using `bash`, follow the bash alias setup [guideline](https://www.cyberciti.biz/faq/create-permanent-bash-alias-linux-unix/)
 
+`if you have any mysql service running on localhost with port 3306, please stop that and continue this setup`
+
 ```bash
 ./vendor/bin/sail up -d
 ```
