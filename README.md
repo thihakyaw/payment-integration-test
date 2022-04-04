@@ -105,7 +105,7 @@ When you start call the [http://localhost](http://localhost/) , you will start t
 - Visa Card - 4242 4242 4242 4242
 - Master Card - 5200828282828210
 
-Expiry Month and Expiry Year can be any month and year `not later than current month and year`. `CVC` and `ZIP` number can be any number.
+Expiry Month and Expiry Year can be `Any future date`. `CVC` and `ZIP` number can be any number.
 
 For more Cards to test, check this [Stripe Card Testing Page](https://stripe.com/docs/testing).
 
