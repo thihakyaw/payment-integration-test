@@ -125,4 +125,5 @@ password - `password`
 
 **Postman Collection**
 
+Add {{host}} as `localhost` in env setup.
 Check the `PaymentIntegrationTestPostmanCollection.json` from the project root directory.
