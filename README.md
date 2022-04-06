@@ -31,7 +31,7 @@ If you are still using the `composer` version 1 and faced memory limit issue, pl
 COMPOSER_MEMORY_LIMIT=-1 composer install
 ```
 
-4. create a new file `.env` in root directory of the project and copy everything inside from `.env.example`. For STRIPE_KEY and STRIPE_SECRET values, you can have your own keys from your account if you prefer to see the customers and payments created on Stripe side. The API keys inside `.env.example` is values that are generated from my account.
+4. create a new file `.env` in root directory of the project and copy everything inside from `.env.example`. For STRIPE_KEY and STRIPE_SECRET values, you can have your own keys from your Stripe account if you prefer to see the customers and payments created on Stripe side. The API keys inside `.env.example` is values that are generated from my account.
 
 
 5. In project directory, run this command to setup the project in `docker`. It will take around 5-10 minutes for the first time composing for Laravel project. 
