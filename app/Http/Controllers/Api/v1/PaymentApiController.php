@@ -57,8 +57,6 @@ class PaymentApiController extends ApiController
             return $this->respondNotFound('User not found');
         }
 
-        $buyer->createOrGetStripeCustomer(); 
-
         try {
             $buyer->addPaymentMethod(data_get($data, 'payment_method'));
         }
