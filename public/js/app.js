@@ -2211,29 +2211,33 @@ checkoutButton.addEventListener('click', /*#__PURE__*/function () {
             document.getElementById("email").disabled = true;
 
             if (!(document.getElementById('name').value == '' || document.getElementById('email').value == '')) {
-              _context.next = 7;
+              _context.next = 11;
               break;
             }
 
             alert('Please fill your name and email before checkout.');
+            checkoutButton.disabled = false;
+            document.getElementById("amount").disabled = false;
+            document.getElementById("name").disabled = false;
+            document.getElementById("email").disabled = false;
             return _context.abrupt("return");
 
-          case 7:
+          case 11:
             makePaymentSpinner.style.display = "block";
-            _context.next = 10;
+            _context.next = 14;
             return axios.post('/api/v1/payments', {
               name: document.getElementById('name').value,
               email: document.getElementById('email').value
             });
 
-          case 10:
+          case 14:
             response = _context.sent;
             clientSecret = response.data.data.intent;
             amount = document.getElementById('amount').value;
             makePaymentSpinner.style.display = "none";
             makePayment.style.display = "block";
 
-          case 15:
+          case 19:
           case "end":
             return _context.stop();
         }
@@ -2257,16 +2261,18 @@ cardButton.addEventListener('click', /*#__PURE__*/function () {
             cardHolderName.disabled = true;
 
             if (!(cardHolderName.value == '')) {
-              _context2.next = 5;
+              _context2.next = 7;
               break;
             }
 
             alert('Please fill your name and card information before making payment.');
+            cardButton.disabled = false;
+            cardHolderName.disabled = false;
             return _context2.abrupt("return");
 
-          case 5:
+          case 7:
             paymentSummarySpinner.style.display = "block";
-            _context2.next = 8;
+            _context2.next = 10;
             return stripe.confirmCardSetup(clientSecret, {
               payment_method: {
                 card: cardElement,
@@ -2276,13 +2282,13 @@ cardButton.addEventListener('click', /*#__PURE__*/function () {
               }
             });
 
-          case 8:
+          case 10:
             _yield$stripe$confirm = _context2.sent;
             setupIntent = _yield$stripe$confirm.setupIntent;
             error = _yield$stripe$confirm.error;
 
             if (!error) {
-              _context2.next = 17;
+              _context2.next = 19;
               break;
             }
 
@@ -2292,8 +2298,8 @@ cardButton.addEventListener('click', /*#__PURE__*/function () {
             cardHolderName.disabled = false;
             return _context2.abrupt("return");
 
-          case 17:
-            _context2.next = 19;
+          case 19:
+            _context2.next = 21;
             return axios.put('/api/v1/payments', {
               name_on_card: document.getElementById('card-holder-name').value,
               email: document.getElementById('email').value,
@@ -2302,13 +2308,13 @@ cardButton.addEventListener('click', /*#__PURE__*/function () {
               description: document.getElementById('description').innerHTML
             });
 
-          case 19:
+          case 21:
             makePayment = _context2.sent;
             chargeInformation = makePayment.data.data.card.stripe_charge_id;
-            _context2.next = 23;
+            _context2.next = 25;
             return axios.get('/api/v1/payments/' + chargeInformation);
 
-          case 23:
+          case 25:
             paymentInformation = _context2.sent;
             paymentInformation = paymentInformation.data.data.payment;
             document.getElementById('product-summary-description').innerHTML = paymentInformation.description;
@@ -2329,7 +2335,7 @@ cardButton.addEventListener('click', /*#__PURE__*/function () {
             paymentSummarySpinner.style.display = "none";
             paymentSummary.style.display = "block";
 
-          case 34:
+          case 36:
           case "end":
             return _context2.stop();
         }

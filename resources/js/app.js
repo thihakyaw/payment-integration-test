@@ -29,6 +29,10 @@ checkoutButton.addEventListener('click', async (e) => {
     document.getElementById('email').value == ''
     ) {
         alert('Please fill your name and email before checkout.');
+        checkoutButton.disabled = false;
+        document.getElementById("amount").disabled = false;
+        document.getElementById("name").disabled = false;
+        document.getElementById("email").disabled = false;
         return;
     }
 
@@ -51,6 +55,8 @@ cardButton.addEventListener('click', async (e) => {
 
     if (cardHolderName.value == '') {
         alert('Please fill your name and card information before making payment.');
+        cardButton.disabled = false;
+        cardHolderName.disabled = false;
         return;
     }
     paymentSummarySpinner.style.display = "block";
